@@ -1,11 +1,37 @@
-- name: 'Auto_renew'
-env:
-USERNAME:${{secrets.USERNAME}}
-PASSWORD:${{secrets.PASSWORD}}
-RECEIVER_EMAIL:${{secrets.RECEIVER_EMAIL}}
-YD_EMAIL:${{secrets.YD_EMAIL}}
-YD_APP_PWD:${{secrets.YD_APP_PWD}}
-# using my own apikey
-USERID:${{secrets.USERID}}
-APIKEY:${{secrets.APIKEY}}
-run: python main.py
+	name: 'EUserv Auto Extend'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+     - main
+  schedule:
+    - cron: '21 4 * * 0,3,5'
+
+jobs:
+  auto_renew:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v2
+
+      - name: 'Set python'
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+
+      - name: 'Install dependencies'
+        run: |
+          python -m pip install --upgrade requests
+          python -m pip install --upgrade beautifulsoup4
+        - name: 'Auto_renew'
+          env:
+            USERNAME:${{secrets.USERNAME}}
+            PASSWORD:${{secrets.PASSWORD}}
+            RECEIVER_EMAIL:${{secrets.RECEIVER_EMAIL}}
+            YD_EMAIL:${{secrets.YD_EMAIL}}
+            YD_APP_PWD:${{secrets.YD_APP_PWD}}
+            # using my own apikey
+            USERID:${{secrets.USERID}}
+            APIKEY:${{secrets.APIKEY}}
+          run: python main.py
