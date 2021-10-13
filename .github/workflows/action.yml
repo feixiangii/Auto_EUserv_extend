@@ -12,6 +12,14 @@ jobs:
   auto_renew:
     runs-on: ubuntu-latest
     steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@v2
+        
+      - name: 'Set Python'
+        uses: actions/setup-python@v1
+        with: 
+          python-version: '3.x'
+          
       - name: 'Auto_renew'
         env:
           USERNAME: ${{ secrets.USERNAME }}
