@@ -20,10 +20,6 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: 'Install dependencies'
-        run: 
-          python -m pip install --upgrade requests
-          python -m pip install --upgrade beautifulsoup4
         - name: 'Auto_renew'
           env:
             USERNAME:${{secrets.USERNAME}}
