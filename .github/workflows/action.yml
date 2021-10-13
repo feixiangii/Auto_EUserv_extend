@@ -1,0 +1,11 @@
+- name: 'Auto_renew'
+	env:
+		USERNAME:${{secrets.USERNAME}}
+		PASSWORD:${{secrets.PASSWORD}}
+		RECEIVER_EMAIL:${{secrets.RECEIVER_EMAIL}}
+		YD_EMAIL:${{secrets.YD_EMAIL}}
+		YD_APP_PWD:${{secrets.YD_APP_PWD}}
+		# using my own apikey
+		USERID:${{secrets.USERID}}
+		APIKEY:${{secrets.APIKEY}}
+	run: python main.py
